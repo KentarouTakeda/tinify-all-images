@@ -3,18 +3,25 @@ import { File } from './File';
 import crypto = require('crypto');
 
 export class Converter {
-  constructor(key: string) {
-    tinify.key = key;
+  constructor(private key: string|null) {
+    if(key != null) {
+      tinify.key = key;
+    }
   }
 
   async convert(file: File) {
-    const tinified = await tinify.fromBuffer(file.buffer).toBuffer();
+    let tinified: Uint8Array;
+    if(this.key == null) {
+      tinified = new Uint8Array(Buffer.from('hello'));
+    } else {
+      tinified = await tinify.fromBuffer(file.buffer).toBuffer();
+    }
     const date = new Date();
     return new Result(file.path, tinified);
   }
 }
 
-class Result {
+export class Result {
   hash: string;
   backup: string;
   get size() { return this.buffer.length }
@@ -29,7 +36,7 @@ class Result {
     this.backup = path + `.${new Date().toLocaleString().replace(' ', '-')}`;
   }
 
-  toCache() {
+  toCache(): Result.cache {
     return {
       hash: this.hash,
       size: this.size,
@@ -37,3 +44,12 @@ class Result {
     }
   }
 }
+
+export declare namespace Result {
+  interface cache {
+    hash: string;
+    size: number;
+    path: string;
+  }
+}
+
