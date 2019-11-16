@@ -2,7 +2,6 @@
   "name": "tinify-all-images",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "test": "jasmine-ts",
     "watch": "chokidar 'src/**/*.ts' 'spec/**/*.ts' -c 'npm test'"
@@ -11,11 +10,8 @@
   "author": "KentarouTakeda <takeda@youmind.jp> (https://github.com/KentarouTakeda)",
   "license": "MIT",
   "dependencies": {
-    "@types/mkdirp": "^0.5.2",
     "dotenv": "^8.2.0",
     "glob": "^7.1.6",
-    "jasmine": "^3.5.0",
-    "mkdirp": "^0.5.1",
     "tinify": "^1.6.0-beta.2"
   },
   "devDependencies": {
@@ -24,6 +20,7 @@
     "@types/jasmine": "^3.4.6",
     "chokidar-cli": "^2.1.0",
     "fs-extra": "^8.1.0",
+    "jasmine": "^3.5.0",
     "jasmine-console-reporter": "^3.1.0",
     "jasmine-ts": "^0.3.0",
     "ts-node": "^8.5.2",

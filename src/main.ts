@@ -1,4 +1,4 @@
-import mkdirp = require('mkdirp');
+import { mkdirp } from 'fs-extra';
 import fs = require('fs');
 import { FileList } from "./FileList";
 import { Converter, Result } from "./Converter";
