@@ -23,6 +23,10 @@ export class File {
     return this._hash
   }
 
+  get path() {
+    return this._path;
+  }
+
   compare(file: File) {
     if(this.size !== file.size) {
       return false;
@@ -34,6 +38,6 @@ export class File {
   }
 
   constructor(
-    private path: string,
+    private _path: string,
   ) { }
 }
