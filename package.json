@@ -1,0 +1,27 @@
+{
+  "name": "tinify-all-images",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "KentarouTakeda <takeda@youmind.jp> (https://github.com/KentarouTakeda)",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "glob": "^7.1.6",
+    "jasmine": "^3.5.0",
+    "tinify": "^1.6.0-beta.2"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.1",
+    "@types/jasmine": "^3.4.6",
+    "chokidar-cli": "^2.1.0",
+    "jasmine-console-reporter": "^3.1.0",
+    "jasmine-ts": "^0.3.0",
+    "ts-node": "^8.5.2",
+    "typescript": "^3.7.2"
+  }
+}
