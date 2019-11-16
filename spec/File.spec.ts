@@ -11,6 +11,11 @@ describe('File', ()=>{
     expect(file.hash).toBe('b1946ac92492d2347c6235b4d2611184');
   });
 
+  it('ファイル内容の取得', ()=>{
+    const file = new File(`${__dirname}/files/file/hello.txt`);
+    expect(file.buffer.toString('utf8')).toBe('hello\n');
+  });
+
   describe('ファイルの比較', ()=>{
     it('同じ内容', ()=>{
       const f1 = new File(`${__dirname}/files/file/a.1.txt`);
@@ -33,4 +38,5 @@ describe('File', ()=>{
       expect(compare).toBe(false);
     });
   });
+
 });

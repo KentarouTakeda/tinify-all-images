@@ -5,7 +5,7 @@ export class File {
 
   private stats?: fs.Stats;
   get size() {
-    if(this.stats == null) {
+    if(this.stats === undefined) {
       this.stats = fs.statSync(this.path);
     }
     return this.stats.size;
@@ -13,14 +13,21 @@ export class File {
 
   private _hash?: string;
   get hash() {
-    if(this._hash == null) {
-      const body = fs.readFileSync(this.path);
+    if(this._hash === undefined) {
       const hash = crypto.createHash('md5');
-      hash.update(body);
+      hash.update(this.buffer);
       this._hash = hash.digest('hex');
-
     }
     return this._hash
+  }
+
+
+  private _buffer?: Buffer;
+  get buffer() {
+    if(this._buffer === undefined) {
+      this._buffer = fs.readFileSync(this.path);
+    }
+    return this._buffer;
   }
 
   get path() {
