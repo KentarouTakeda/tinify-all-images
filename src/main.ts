@@ -9,7 +9,7 @@ export async function main(srcdir: string): Promise<Result.cache[]> {
   const cache: {[path:string]: Result.cache} = {};
   try {
     const file = fs.realpathSync(cacheFile);
-    const caches: Result.cache[] = require(file);
+    const caches: Result.cache[] = JSON.parse(fs.readFileSync(file).toString());
     caches.forEach(c => {
       cache[c.path] = c;
     })
@@ -17,7 +17,7 @@ export async function main(srcdir: string): Promise<Result.cache[]> {
 
   const converter = new Converter(null);
   const list = new FileList(srcdir);
-  const results: Result.cache[] = [];
+  const converteds: Result.cache[] = [];
 
   for(let file of list.all()) {
     const cached = cache[file.path];
@@ -35,15 +35,16 @@ export async function main(srcdir: string): Promise<Result.cache[]> {
     await fs.renameSync(file.path, converted.backup);
     await fs.writeFileSync(file.path, converted.buffer);
 
-    results.push(converted.toCache());
+    cache[file.path] = converted.toCache()
+    converteds.push(converted.toCache());
   }
 
-  results.sort((a, b) => {
+  const results = Object.values(cache).sort((a, b) => {
     return a.path.localeCompare(b.path);
   })
 
   const json = JSON.stringify(results);
   fs.writeFileSync(cacheFile, json);
 
-  return results;
+  return converteds;
 }

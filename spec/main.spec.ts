@@ -1,4 +1,5 @@
 import { main } from '../src/main';
+import { Result } from "../src/Converter";
 import fs = require('fs-extra');
 
 describe('main', ()=>{
@@ -62,4 +63,26 @@ describe('main', ()=>{
     });
   });
 
+  describe('一部だけ更新された', ()=>{
+    const SRC = `spec/files/main/partialmodified/src`;
+    const WORK = `spec/files/main/partialmodified/work`;
+    beforeEach(()=>{
+      fs.removeSync(WORK);
+      fs.copySync(SRC, WORK);
+    });
+    afterEach(()=>{
+      fs.removeSync(WORK);
+    });
+
+    it('キャッシュと更新とがマージされる', async done =>{
+      const results = await main(WORK);
+      expect(results.length).toBe(1);
+
+      const path = fs.realpathSync(`${WORK}/tinified.json`);
+      const cache: Result.cache[] = JSON.parse(fs.readFileSync(path).toString());
+      expect(cache.length).toBe(2);
+
+      done();
+    });
+  });
 });
