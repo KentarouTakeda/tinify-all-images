@@ -2,6 +2,9 @@
   "name": "tinify-all-images",
   "version": "0.0.1",
   "description": "",
+  "bin": {
+    "tinify-all-images": "./bin/index.js"
+  },
   "scripts": {
     "test": "jasmine-ts",
     "watch": "chokidar 'src/**/*.ts' 'spec/**/*.ts' -c 'npm test'"
