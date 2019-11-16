@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jasmine-ts",
+    "watch": "chokidar src spec -c 'npm test'"
   },
   "keywords": [],
   "author": "KentarouTakeda <takeda@youmind.jp> (https://github.com/KentarouTakeda)",
