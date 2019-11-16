@@ -1,0 +1,39 @@
+import tinify = require('tinify');
+import { File } from './File';
+import crypto = require('crypto');
+
+export class Converter {
+  constructor(key: string) {
+    tinify.key = key;
+  }
+
+  async convert(file: File) {
+    const tinified = await tinify.fromBuffer(file.buffer).toBuffer();
+    const date = new Date();
+    return new Result(file.path, tinified);
+  }
+}
+
+class Result {
+  hash: string;
+  backup: string;
+  get size() { return this.buffer.length }
+
+  constructor(
+    public path: string,
+    public buffer: Uint8Array,
+  ) {
+    const hash = crypto.createHash('md5');
+    hash.update(buffer);
+    this.hash = hash.digest('hex');
+    this.backup = path + `.${new Date().toLocaleString().replace(' ', '-')}`;
+  }
+
+  toCache() {
+    return {
+      hash: this.hash,
+      size: this.size,
+      path: this.path,
+    }
+  }
+}
