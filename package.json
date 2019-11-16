@@ -11,9 +11,11 @@
   "author": "KentarouTakeda <takeda@youmind.jp> (https://github.com/KentarouTakeda)",
   "license": "MIT",
   "dependencies": {
+    "@types/mkdirp": "^0.5.2",
     "dotenv": "^8.2.0",
     "glob": "^7.1.6",
     "jasmine": "^3.5.0",
+    "mkdirp": "^0.5.1",
     "tinify": "^1.6.0-beta.2"
   },
   "devDependencies": {
