@@ -55,14 +55,14 @@ export async function main(options: main.Options): Promise<Result.cache[]> {
 
     cache[file.path] = converted.toCache()
     converteds.push(converted.toCache());
+
+    const results = Object.values(cache).sort((a, b) => {
+      return a.path.localeCompare(b.path);
+    })
+    const json = JSON.stringify(results);
+    fs.writeFileSync(cacheFile, json);
   }
 
-  const results = Object.values(cache).sort((a, b) => {
-    return a.path.localeCompare(b.path);
-  })
-
-  const json = JSON.stringify(results);
-  fs.writeFileSync(cacheFile, json);
 
   return converteds;
 }
