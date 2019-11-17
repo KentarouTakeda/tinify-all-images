@@ -1,7 +1,7 @@
 {
   "name": "tinify-all-images",
   "version": "0.0.1",
-  "description": "",
+  "description": "指定ディレクトリ配下の全てのpng/jpgをtinypngに通す",
   "bin": {
     "tinify-all-images": "./bin/index.js"
   },
