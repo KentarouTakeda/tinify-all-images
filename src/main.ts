@@ -3,7 +3,7 @@ import fs = require('fs');
 import { FileList } from "./FileList";
 import { Converter, Result } from "./Converter";
 
-export async function main(srcdir: string): Promise<Result.cache[]> {
+export async function main(srcdir: string, logdir: string): Promise<Result.cache[]> {
 
   const cacheFile = `${srcdir}/tinified.json`;
   const cache: {[path:string]: Result.cache} = {};
