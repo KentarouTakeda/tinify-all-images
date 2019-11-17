@@ -33,7 +33,7 @@ export class Result {
     const hash = crypto.createHash('md5');
     hash.update(buffer);
     this.hash = hash.digest('hex');
-    this.backup = path + `.${new Date().toLocaleString().replace(' ', '-')}`;
+    this.backup = `${path}.${new Date().toLocaleString().replace(/[ :]/g, '-')}`;
   }
 
   toCache(): Result.cache {
