@@ -7,12 +7,17 @@
   },
   "scripts": {
     "test": "jasmine-ts",
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
     "watch": "chokidar 'src/**/*.ts' 'spec/**/*.ts' -c 'npm test'"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/KentarouTakeda/tinify-all-images.git"
   },
+  "files": [
+    "dist/"
+  ],
   "keywords": [],
   "author": "KentarouTakeda <takeda@youmind.jp> (https://github.com/KentarouTakeda)",
   "license": "MIT",
