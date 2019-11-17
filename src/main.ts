@@ -27,7 +27,7 @@ export async function main(options: main.Options): Promise<Result.cache[]> {
     })
   } catch(e) {}
 
-  const converter = new Converter(null);
+  const converter = new Converter(key);
   const list = new FileList(target);
   const converteds: Result.cache[] = [];
 

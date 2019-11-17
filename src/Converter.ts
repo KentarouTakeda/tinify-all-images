@@ -3,7 +3,7 @@ import { File } from './File';
 import crypto = require('crypto');
 
 export class Converter {
-  constructor(private key: string|null) {
+  constructor(private key?: string) {
     if(key != null) {
       tinify.key = key;
     }
@@ -12,7 +12,7 @@ export class Converter {
   async convert(file: File) {
     let tinified: Uint8Array;
     if(this.key == null) {
-      tinified = new Uint8Array(Buffer.from('hello'));
+      tinified = new Uint8Array(Buffer.from('hello')); // テスト側でモックしたい
     } else {
       tinified = await tinify.fromBuffer(file.buffer).toBuffer();
     }
