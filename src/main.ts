@@ -38,11 +38,17 @@ export async function main(options: main.Options): Promise<Result.cache[]> {
     convert = convert || (file.size != cached.size);
     convert = convert || (file.hash != cached.hash);
 
+    console.log(file.path);
+
     if(convert === false) {
+      console.log('  変換済');
+      console.log('  スキップします');
       continue;
     }
 
+    console.log('  変換中');
     const converted = await converter.convert(file);
+    console.log('  変換しました');
 
     await fs.renameSync(file.path, converted.backup);
     await fs.writeFileSync(file.path, converted.buffer);
