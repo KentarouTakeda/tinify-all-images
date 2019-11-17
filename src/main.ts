@@ -3,9 +3,21 @@ import fs = require('fs');
 import { FileList } from "./FileList";
 import { Converter, Result } from "./Converter";
 
-export async function main(srcdir: string, logdir: string): Promise<Result.cache[]> {
+export declare namespace main {
+  type Options = {
+    target: string;
+    log?: string;
+    key?: string;
+  };
+}
 
-  const cacheFile = `${srcdir}/tinified.json`;
+export async function main(options: main.Options): Promise<Result.cache[]> {
+  let { target, log, key } = options;
+  if(log == null) {
+    log = target;
+  }
+
+  const cacheFile = `${target}/tinified.json`;
   const cache: {[path:string]: Result.cache} = {};
   try {
     const file = fs.realpathSync(cacheFile);
@@ -16,7 +28,7 @@ export async function main(srcdir: string, logdir: string): Promise<Result.cache
   } catch(e) {}
 
   const converter = new Converter(null);
-  const list = new FileList(srcdir);
+  const list = new FileList(target);
   const converteds: Result.cache[] = [];
 
   for(let file of list.all()) {

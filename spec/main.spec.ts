@@ -16,7 +16,7 @@ describe('main', ()=>{
     });
 
     it('対象ファイルが上書きされる', async done =>{
-      const results = await main(WORK);
+      const results = await main({target:WORK});
       expect(results.length).toBe(1);
 
       const converted = fs.readFileSync(`${WORK}/example-orig.png`).toString('utf8');
@@ -37,7 +37,7 @@ describe('main', ()=>{
     });
 
     it('変換済みは再変換されない', async done =>{
-      const results = await main(WORK);
+      const results = await main({target:WORK});
       expect(results.length).toBe(0);
 
       done();
@@ -56,7 +56,7 @@ describe('main', ()=>{
     });
 
     it('再変換される', async done =>{
-      const results = await main(WORK);
+      const results = await main({target:WORK});
       expect(results.length).toBe(1);
 
       done();
@@ -75,7 +75,7 @@ describe('main', ()=>{
     });
 
     it('キャッシュと更新とがマージされる', async done =>{
-      const results = await main(WORK);
+      const results = await main({target: WORK});
       expect(results.length).toBe(1);
 
       const path = fs.realpathSync(`${WORK}/tinified.json`);
