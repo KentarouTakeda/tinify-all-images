@@ -1,4 +1,4 @@
-import { File } from '../src/File';
+import { File } from './File';
 import glob = require('glob');
 
 export class FileList {
@@ -8,13 +8,11 @@ export class FileList {
   constructor(
     private dir: string,
   ) {
-    glob.sync(`${dir}/**/*.{jpg,jpeg,,png}`, {
-      nocase: true,
+    glob.sync(`${dir}/**/*.{jpg,jpeg,png,JPG,JPEG,PNG}`, {
       ignore: ['**/node_modules/**'],
     }).forEach(path => {
       this.files.push(new File(path));
     })
-
   }
 
   all() {

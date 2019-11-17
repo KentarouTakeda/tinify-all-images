@@ -5,7 +5,7 @@ describe('FileList', ()=>{
   it('ディレクトリ配下のファイル一覧', ()=>{
     const list = new FileList(`${__dirname}/files/list`);
     const files = list.all().map(file => path.basename(file.path)).sort();
-    expect(files).toEqual([ '1.jpeg', '2.jpg', '3.png', '5.PnG' ]);
+    expect(files).toEqual([ '1.jpeg', '2.jpg', '3.png', '5.PNG' ]);
   });
 
   it('node_modules配下は除外', ()=>{
@@ -21,7 +21,7 @@ describe('FileList', ()=>{
       'spec/files/list/1.jpeg',
       'spec/files/list/2.jpg',
       'spec/files/list/3.png',
-      'spec/files/list/5.PnG'
+      'spec/files/list/5.PNG'
     ];
     expect(EXPECTED).toEqual(files);
   });
